@@ -6,6 +6,8 @@ function MakeImage(filePath){
   this.filePath = filePath;
 }
 
+treeDirectory = ["images/tree1.jpg", "images/tree2.jpg", "images/tree3.jpg"]
+cityDirectory = ["images/city1.jpg", "images/city2.jpg", "images/city3.jpg"]
 var tree1 = ()
 var tree2 =
 var tree3 =
