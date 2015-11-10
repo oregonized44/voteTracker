@@ -44,10 +44,16 @@ this.voteNumber = Math.floor((Math.random() * 49 ) + 2);     ///utility zone
 //OnPageLoad =================================================================
 
 (function(){
+
 leftImageEl.src  = treeDirectory[randomTreePlaceholder].filePath;
-midwayTreeDirectory = slice(treeDirectory[randomTreePlaceholder]);
+
+midwayTreeDirectory.slice(treeDirectory[randomTreePlaceholder]);
+
 rightImageEl.src = cityDirectory[randomCityPlaceholder].filePath;
-midwayCityDirectory = slice(cityDirectory[randomCityPlaceholder]);
+
+midwayCityDirectory.slice(cityDirectory[randomCityPlaceholder]);
+
+
 })();
 
 leftImageEl.addEventListener("click", selectImage);
@@ -62,23 +68,28 @@ voteButton.addEventListener("click", voteSubmit);
 
 ////////////////////select-image///////////////////////////////////////////////
 
-function selectImg() {
+function selectImage() {
 this.className= "imgPicked";
 }
 
 
 function resetImages(){
-  treesDirectory  = emptyHatTrees;
-
-  citiesDirectory = emptyHatCities;
-
+  //treesDirectory  = emptyHatTrees;
+  for (mm=0; mm < emptyHatTrees.length; mm++){
+    treesDirectory.push(emptyHatTrees[0]);
+    for (jj = 0; jj < emptyHatTrees.length; jj++){
+      delete emptyHatTrees[0];
+    }
+  }
+  //citiesDirectory = emptyHatCities;
+  for (gg=0; gg<emptyHatCities.length; gg++){
+    citiesDirectory.push(emptyHatCities[0]);
+    for (kk = 0; kk < emptyHatCities.length; kk++){
+      delete emptyHatCities[0];
+    }
+  }
 }
 
-
-
-///////////////////////////////////////////////////////////////////
-
-/*
 function voteSubmit(){
 
 if (document.getElementsByClassName("imgPicked")){
@@ -110,9 +121,7 @@ resetImgs();
 //change photo to new source
 
 
-}
-*/
-
+} //Ends voteSubmit
 
 
 
@@ -126,4 +135,4 @@ total+=
 
 
 }
-
+*/
