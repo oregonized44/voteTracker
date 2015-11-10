@@ -1,12 +1,8 @@
-function imageConstructor(filePath,){
 
-this.filePath = filePath;
-this.voteNumber = Math.floor((Math.random() * 49 ) + 2);
-
-}
 
 treeDirectory = ["tree1", "tree2", "tree3"]
 cityDirectory = ["city1", "city2", "city3"]
+
 
 var tree1 = new imageConstructor(images/tree1.jpg)
 var tree2 = new imageConstructor(images/tree2.jpg)
@@ -16,8 +12,13 @@ var city2 = new imageConstructor(images/city2.jpg)
 var city3 = new imageConstructor(images/city3.jpg)
 
 
+function imageConstructor(filePath,){
 
-
+this.filePath = filePath;
+this.voteNumber = Math.floor((Math.random() * 49 ) + 2);     ///utility zone
+}
+                                                              //this is our utility area
+emptyHat = [];
 
 
 var imageTrees = [];
@@ -29,13 +30,13 @@ var imageCities = [];
 
 
 var randomTree = function() {            //selects our tree image
-Math.floor((Math.random() * treeDirectory.length)
 
-
+return Math.floor(Math.random() * treeDirectory.length);
 }
 
-function randomCity{             //selects our city image
-Math.
+var randomCity = function(){             //selects our city image
+
+return Math.floor(Math.random() * cityDirectory.length);
 
 }
 
@@ -57,10 +58,7 @@ push right image on
 
 
 
-function MakeImage(filePath){
-  used = false;
-  this.filePath = filePath;
-}
+
 
 
 
