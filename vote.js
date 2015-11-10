@@ -6,8 +6,7 @@
 
 
 //UTILITY FUNCTIONS AND ARRAYS ===============================================
-treeDirectory = ["tree1", "tree2", "tree3"];
-cityDirectory = ["city1", "city2", "city3"];
+
 
 
 var tree1 = new imageConstructor("images/tree1.jpg");
@@ -17,13 +16,16 @@ var city1 = new imageConstructor("images/city1.jpg");
 var city2 = new imageConstructor("images/city2.jpg");
 var city3 = new imageConstructor("images/city3.jpg");
 
+treeDirectory = [tree1, tree2, tree3];
+cityDirectory = [city1, city2, city3];
 //GET A RANDOM TREE IMAGE
 
+var x;
 
 function randomTree() {            //selects our tree image
 
-  var x = Math.floor(Math.random() * treeDirectory.length);
-  return x;
+  x = Math.floor(Math.random() * treeDirectory.length);
+
 };
 var randomTreePlaceholder = randomTree();
 //GET A RANDOM CITY IMAGE
@@ -33,6 +35,7 @@ function randomCity(){             //selects our city image
   return y;
 };
 var randomCityPlaceholder = randomCity();
+
 var emptyHatTrees = [];
 var emptyHatCities = [];
 
@@ -47,27 +50,26 @@ leftImageEl.addEventListener("mouseover", selectImage);
 rightImageEl.addEventListener("mouseover", selectImage);*/
 
 
-
-
-//OnPageLoad =================================================================
-(function(){
-
-document.getElementById("leftImage").innerHTML = "<img id='leftImage' src='" + treeDirectory[randomTreePlaceholder].filePath + "'";
-document.getElementById("rightImage").innerHTML = "<img id='rightimage' scr='" + cityDirectory[randomCityPlaceholder].filePath + "'"
-
-
-
-
-})();
-
-
-
 //IMAGE DATA OBJECT CONSTRUCTION
 function imageConstructor(filePath){
 
 this.filePath = filePath;
 this.voteNumber = Math.floor((Math.random() * 49 ) + 2);     ///utility zone
 }
+
+//OnPageLoad =================================================================
+(function(){
+leftImageEl.src  = "images/tree3.jpg" ;
+console.log(treeDirectory[1].filePath);
+rightImageEl.src = "images/city2.jpg" ;
+console.log(cityDirectory[2].filePath);//(cityDirectory[x].filePath);
+//leftImageEl.innerHTML = "<img id='leftImage' src='" +  + "'";
+//rightImageEl.innerHTML = "<img id='rightimage' scr='" + cityDirectory[randomCityPlaceholder].filePath + "'"
+
+
+
+
+})();
 
 /*//PRINT IMAGES TO PAGE
 function upLoadImages(left,right){   //function will put images on page
@@ -79,9 +81,7 @@ push left image on;
 push right image on;
 
 
-}*/
-
-/*
+}
 //MAKE CHART DYNAMICALLY BASED ON IMAGES
 
 //NEW PAIR FUNCTIONS TRIGGER FUNCITON
