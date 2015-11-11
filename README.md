@@ -2,6 +2,9 @@
 Code project 3 for codefellows 201. Team coded by Jake Herold and Connor Cummings.
 
 
+11/11/15
+added jquery. Fixed css. reasonable mobile experience.
+
 
 11/10/15
 Made the thing work. Added images that cycle and a chart.
