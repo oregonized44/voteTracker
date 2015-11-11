@@ -1,4 +1,4 @@
-//UTILITY FUNCTIONS AND ARRAYS ===============================================
+/*UTILITY FUNCTIONS AND ARRAYS ===============================================*/
 var tree1 = new imageConstructor("images/tree1.jpg");
 var tree2 = new imageConstructor("images/tree2.jpg");
 var tree3 = new imageConstructor("images/tree3.jpg");
@@ -12,6 +12,26 @@ midwayTreeDirectory = [];
 midwayCityDirectory = [];
 emptyHatTrees = [];
 emptyHatCities = [];
+
+var totalTreeTemp = function() {
+  var treeTemp = 0;
+  for (ii = 0; ii<treeDirectory.length; ii++ ){
+    treeTemp+= treeDirectory[ii].voteNumber;
+}
+  return treeTemp;
+};
+
+treeVoteTotal = totalTreeTemp();
+
+var totalCityTemp = function() {
+  var cityTemp = 0;
+  for (ii = 0; ii<cityDirectory.length; ii++ ){
+    cityTemp+= cityDirectory[ii].voteNumber;
+}
+  return cityTemp;
+};
+
+cityVoteTotal = totalCityTemp();
 
 var treeMax = treeDirectory.length - 1;
 var cityMax = cityDirectory.length - 1;
@@ -63,6 +83,7 @@ midwayCityDirectory.push(cityDirectory[randomCityPlaceholder]);
 cityDirectory[randomCityPlaceholder] = cityDirectory[cityMax];
 cityDirectory.pop();
 
+makeChart();
 
 })();
 
@@ -91,7 +112,7 @@ function cycleImages(){
     if((cityDirectory.length === 0) && (treesDirectory.length === 0)){
         resetImages();
       }
-
+      makeChart();
 }
 
 leftImageEl.addEventListener("click", selectImageLeft);
@@ -107,11 +128,13 @@ rightImageEl.addEventListener("click", selectImageRight);
 function selectImageLeft() {
 
   midwayTreeDirectory[0].voteNumber++;
+  treeVoteTotal++;
   console.log("i'm image " + midwayTreeDirectory[0].filePath + " and my vote count is " + midwayTreeDirectory[0].voteNumber);
   cycleImages();
 }
 function selectImageRight(){
   midwayCityDirectory[0].voteNumber++;
+  cityVoteTotal++;
   console.log("i'm image " + midwayCityDirectory[0].filePath + " and my vote count is " + midwayCityDirectory[0].voteNumber);
   cycleImages();
 }
@@ -142,6 +165,42 @@ function resetImages(){
     }
   }
 }
+
+//CHART STUFF
+ function makeChart() {
+
+    var treeChartTemp = treeVoteTotal;
+    var cityChartTemp = cityVoteTotal;
+    var chart = new CanvasJS.Chart("chartContainer",
+    {
+      title:{
+        text: "Cities vs Trees"
+      },
+      axisY: {
+        title: "Total Vote number",
+        maximum: 100
+      },
+      data: [
+      {
+        type: "bar",
+        showInLegend: true,
+        legendText: "Gold",
+        color: "gold",
+        dataPoints: [
+        { y: treeChartTemp, label: "Trees"},
+        { y: cityChartTemp, label: "Cities"},
+
+        ]
+      }
+
+      ]
+    });
+
+chart.render();
+}
+
+
+
 
 /*var treeVoteTotal =  //Added functionality for later (cumulitive chart)
 
