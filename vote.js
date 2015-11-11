@@ -15,6 +15,8 @@ emptyHatCities = [];
 
 var treeMax = treeDirectory.length - 1;
 var cityMax = cityDirectory.length - 1;
+var midwayTreeMax = midwayTreeDirectory.length - 1;
+var midwayCityMax = midwayCityDirectory.length - 1;
 //GET A RANDOM TREE IMAGE
 function randomTree() {            //selects our tree image
  x = Math.floor(Math.random() * treeDirectory.length);
@@ -46,15 +48,20 @@ this.voteNumber = Math.floor((Math.random() * 49 ) + 2);     ///utility zone
 //OnPageLoad =================================================================
 
 (function(){
-
+//loads image to page
 leftImageEl.src  = treeDirectory[randomTreePlaceholder].filePath;
+//Copies used image into temp. array
 midwayTreeDirectory.push(treeDirectory[randomTreePlaceholder]);
-delete treeDirectory[randomTreePlaceholder];
+//replicates unused image on top of used image in the array
+treeDirectory[randomTreePlaceholder] = treeDirectory[treeMax];
+//pops off last image in array
+treeDirectory.pop();
+
 
 rightImageEl.src = cityDirectory[randomCityPlaceholder].filePath;
 midwayCityDirectory.push(cityDirectory[randomCityPlaceholder]);
-delete cityDirectory[randomCityPlaceholder];
-
+cityDirectory[randomCityPlaceholder] = cityDirectory[cityMax];
+cityDirectory.pop();
 
 })();
 
@@ -62,12 +69,12 @@ function cycleImages(){
 
   //Empties midway array into emptyHat array
   emptyHatTrees.push(midwayTreeDirectory[0]);
-
-    delete midwayTreeDirectory[0];
+  //deletes and collapses midway array
+  midwayTreeDirectory.pop();
 
 
   emptyHatCities.push(midwayCityDirectory[0]);
-    delete midwayCityDirectory[0];
+  midwayCityDirectory.pop();
 
   //put "enter chart" bit in here, first
 
@@ -77,7 +84,7 @@ function cycleImages(){
     rightImageEl.src = cityDirectory[randomCityPlaceholder].filePath;
 
   //if original array is empty, recycle everything
-    if((citiesDirectory.length === 0) && (treesDirectory.length === 0)){
+    if((cityDirectory.length === 0) && (treesDirectory.length === 0)){
         resetImages();
       }
 }
@@ -102,21 +109,29 @@ function selectImageRight(){
   cycleImages();
 }
 
-//ifthis.className= "imgPicked";
 
 function resetImages(){
   //treesDirectory  = emptyHatTrees;
   for (mm=0; mm < emptyHatTrees.length; mm++){
+
     treesDirectory.push(emptyHatTrees[mm]);
-    for (jj = 0; jj < emptyHatTrees.length; jj++){
-      delete emptyHatTrees[jj];
+
+    if ((treeDirectory.length) === (emptyHatTrees.length)){
+
+        for (jj = 0; jj < emptyHatTrees.length; jj++){
+            emptyHatTrees.pop();
+      }
     }
   }
-  //citiesDirectory = emptyHatCities;
+  //cityDirectory = emptyHatCities;
   for (gg=0; gg<emptyHatCities.length; gg++){
-    citiesDirectory.push(emptyHatCities[gg]);
-    for (kk = 0; kk < emptyHatCities.length; kk++){
-      delete emptyHatCities[kk];
+
+    cityDirectory.push(emptyHatCities[gg]);
+
+    if ((cityDirectory.length)=== (emptyHatCities.length)){
+        for (kk = 0; kk < emptyHatCities.length; kk++){
+          delete emptyHatCities[kk];
+      }
     }
   }
 }
