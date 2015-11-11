@@ -1,14 +1,4 @@
-
-
-
-
-
-
-
 //UTILITY FUNCTIONS AND ARRAYS ===============================================
-
-
-
 var tree1 = new imageConstructor("images/tree1.jpg");
 var tree2 = new imageConstructor("images/tree2.jpg");
 var tree3 = new imageConstructor("images/tree3.jpg");
@@ -18,85 +8,153 @@ var city3 = new imageConstructor("images/city3.jpg");
 
 treeDirectory = [tree1, tree2, tree3];
 cityDirectory = [city1, city2, city3];
+midwayTreeDirectory = [];
+midwayCityDirectory = [];
+emptyHatTrees = [];
+emptyHatCities = [];
+
+var treeMax = treeDirectory.length - 1;
+var cityMax = cityDirectory.length - 1;
+var midwayTreeMax = midwayTreeDirectory.length - 1;
+var midwayCityMax = midwayCityDirectory.length - 1;
 //GET A RANDOM TREE IMAGE
-
-var x;
-
 function randomTree() {            //selects our tree image
-
-  x = Math.floor(Math.random() * treeDirectory.length);
-
-};
+ x = Math.floor(Math.random() * treeDirectory.length);
+ return x;
+}
 var randomTreePlaceholder = randomTree();
-//GET A RANDOM CITY IMAGE
+
+
+//GET A RANDOM CITY IMAGE`
 function randomCity(){             //selects our city image
-
-  var y = Math.floor(Math.random() * cityDirectory.length);
-  return y;
-};
+ var y = Math.floor(Math.random() * cityDirectory.length);
+ return y;
+}
 var randomCityPlaceholder = randomCity();
-
-var emptyHatTrees = [];
-var emptyHatCities = [];
 
 leftImageEl = document.getElementById("leftImage");
 rightImageEl = document.getElementById("rightImage");
 resetButtonEl = document.getElementById("resetButton");
 voteButtonEl = document.getElementById("voteButton");
 
-/*leftImageEl.addEventListener("click", selectImage);
-rightImageEl.addEventListener("click", selectImage);
-leftImageEl.addEventListener("mouseover", selectImage);
-rightImageEl.addEventListener("mouseover", selectImage);*/
-
 
 //IMAGE DATA OBJECT CONSTRUCTION
 function imageConstructor(filePath){
-
 this.filePath = filePath;
 this.voteNumber = Math.floor((Math.random() * 49 ) + 2);     ///utility zone
 }
 
+
 //OnPageLoad =================================================================
+
 (function(){
-leftImageEl.src  = "images/tree3.jpg" ;
-console.log(treeDirectory[1].filePath);
-rightImageEl.src = "images/city2.jpg" ;
-console.log(cityDirectory[2].filePath);//(cityDirectory[x].filePath);
-//leftImageEl.innerHTML = "<img id='leftImage' src='" +  + "'";
-//rightImageEl.innerHTML = "<img id='rightimage' scr='" + cityDirectory[randomCityPlaceholder].filePath + "'"
+//loads image to page
+leftImageEl.src  = treeDirectory[randomTreePlaceholder].filePath;
+//Copies used image into temp. array
+midwayTreeDirectory.push(treeDirectory[randomTreePlaceholder]);
+//replicates unused image on top of used image in the array
+treeDirectory[randomTreePlaceholder] = treeDirectory[treeMax];
+//pops off last image in array
+treeDirectory.pop();
 
 
-
+rightImageEl.src = cityDirectory[randomCityPlaceholder].filePath;
+midwayCityDirectory.push(cityDirectory[randomCityPlaceholder]);
+cityDirectory[randomCityPlaceholder] = cityDirectory[cityMax];
+cityDirectory.pop();
 
 })();
 
-/*//PRINT IMAGES TO PAGE
-function upLoadImages(left,right){   //function will put images on page
-var left = leftImageEl ;             //  accesing our dom elemnt by Id
-var right= rightImageEl  ;           //  accessing our dom elenment by id
-leftImageEl = get random tree;
-rightImageEl = get random city;
-push left image on;
-push right image on;
+function cycleImages(){
 
+  randomCityPlaceholder = randomCity();
+  randomTreePlaceholder = randomTree();
+  //Empties midway array into emptyHat array
+  emptyHatTrees.push(midwayTreeDirectory[0]);
+  //deletes and collapses midway array
+  midwayTreeDirectory.pop();
+
+
+  emptyHatCities.push(midwayCityDirectory[0]);
+  midwayCityDirectory.pop();
+
+  //put "enter chart" bit in here, first
+
+  //re-writes the src of the images in html
+  leftImageEl.src  = treeDirectory[randomTreePlaceholder].filePath;
+  midwayTreeDirectory.push(treeDirectory[randomTreePlaceholder]);
+  rightImageEl.src = cityDirectory[randomCityPlaceholder].filePath;
+  midwayCityDirectory.push(cityDirectory[randomCityPlaceholder]);
+
+  //if original array is empty, recycle everything
+    if((cityDirectory.length === 0) && (treesDirectory.length === 0)){
+        resetImages();
+      }
 
 }
-//MAKE CHART DYNAMICALLY BASED ON IMAGES
 
-//NEW PAIR FUNCTIONS TRIGGER FUNCITON
+leftImageEl.addEventListener("click", selectImageLeft);
+rightImageEl.addEventListener("click", selectImageRight);
+//resetButtonEl.addEventListener("click", cycleImages);
 
-function newPair(){
 
+//voteButton.addEventListener("click", voteSubmit);
+
+
+////////////////////select-image///////////////////////////////////////////////
+
+function selectImageLeft() {
+
+  midwayTreeDirectory[0].voteNumber++;
+  console.log(midwayTreeDirectory[0].voteNumber);
+  cycleImages();
+}
+function selectImageRight(){
+  midwayCityDirectory[0].voteNumber++;
+  console.log(midwayCityDirectory[0].voteNumber);
+  cycleImages();
 }
 
-//COUNT VOTES
-function recordVote(){
+
+function resetImages(){
+  //treesDirectory  = emptyHatTrees;
+  for (mm=0; mm < emptyHatTrees.length; mm++){
+
+    treesDirectory.push(emptyHatTrees[mm]);
+
+    if ((treeDirectory.length) === (emptyHatTrees.length)){
+
+        for (jj = 0; jj < emptyHatTrees.length; jj++){
+            emptyHatTrees.pop();
+      }
+    }
+  }
+  //cityDirectory = emptyHatCities;
+  for (gg=0; gg<emptyHatCities.length; gg++){
+
+    cityDirectory.push(emptyHatCities[gg]);
+
+    if ((cityDirectory.length)=== (emptyHatCities.length)){
+        for (kk = 0; kk < emptyHatCities.length; kk++){
+          delete emptyHatCities[kk];
+      }
+    }
+  }
+}
+
+//change photo to new source
+
+
+
+
+/*var treeVoteTotal =  //Added functionality for later (cumulitive chart)
+
+
+for (ii = 0; ii<treeDirectory.length; ii++ ){
+
+
+total+=
 
 
 }
 */
-
-
-
-
