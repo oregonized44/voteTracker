@@ -18,12 +18,14 @@ background-color: #EFECCA;
 }
 #leftImage{
 width: 30%;
+height: 20%;
 display: inline-block;
 
 
 }
 #rightImage{
 width:30%;
+height: 20%;
 display: inline-block;
 
 }
