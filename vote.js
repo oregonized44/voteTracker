@@ -106,12 +106,12 @@ rightImageEl.addEventListener("click", selectImageRight);
 function selectImageLeft() {
 
   midwayTreeDirectory[0].voteNumber++;
-  console.log(midwayTreeDirectory[0].voteNumber);
+  console.log("i'm image " + midwayTreeDirectory[0].filePath + " and my vote count is " + midwayTreeDirectory[0].voteNumber);
   cycleImages();
 }
 function selectImageRight(){
   midwayCityDirectory[0].voteNumber++;
-  console.log(midwayCityDirectory[0].voteNumber);
+  console.log("i'm image " + midwayCityDirectory[0].filePath + " and my vote count is " + midwayCityDirectory[0].voteNumber);
   cycleImages();
 }
 
