@@ -66,7 +66,7 @@ function randomCity(){             //selects our city image
 }
 var randomCityPlaceholder = randomCity();
 
-leftImageEl = document.getElementById("leftImage");
+leftImageEl = $('#leftImage')[0];
 rightImageEl = document.getElementById("rightImage");
 resetButtonEl = document.getElementById("resetButton");
 voteButtonEl = document.getElementById("voteButton");
