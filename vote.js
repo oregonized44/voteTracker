@@ -63,6 +63,7 @@ midwayCityDirectory.push(cityDirectory[randomCityPlaceholder]);
 cityDirectory[randomCityPlaceholder] = cityDirectory[cityMax];
 cityDirectory.pop();
 
+
 })();
 
 function cycleImages(){
@@ -141,11 +142,6 @@ function resetImages(){
     }
   }
 }
-
-//change photo to new source
-
-
-
 
 /*var treeVoteTotal =  //Added functionality for later (cumulitive chart)
 
