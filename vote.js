@@ -21,7 +21,7 @@ var midwayCityMax = midwayCityDirectory.length - 1;
 function randomTree() {            //selects our tree image
  x = Math.floor(Math.random() * treeDirectory.length);
  return x;
-};
+}
 var randomTreePlaceholder = randomTree();
 
 
@@ -29,7 +29,7 @@ var randomTreePlaceholder = randomTree();
 function randomCity(){             //selects our city image
  var y = Math.floor(Math.random() * cityDirectory.length);
  return y;
-};
+}
 var randomCityPlaceholder = randomCity();
 
 leftImageEl = document.getElementById("leftImage");
@@ -67,6 +67,8 @@ cityDirectory.pop();
 
 function cycleImages(){
 
+  randomCityPlaceholder = randomCity();
+  randomTreePlaceholder = randomTree();
   //Empties midway array into emptyHat array
   emptyHatTrees.push(midwayTreeDirectory[0]);
   //deletes and collapses midway array
@@ -79,18 +81,22 @@ function cycleImages(){
   //put "enter chart" bit in here, first
 
   //re-writes the src of the images in html
-    leftImageEl.src  = treeDirectory[randomTreePlaceholder].filePath;
-
-    rightImageEl.src = cityDirectory[randomCityPlaceholder].filePath;
+  leftImageEl.src  = treeDirectory[randomTreePlaceholder].filePath;
+  midwayTreeDirectory.push(treeDirectory[randomTreePlaceholder]);
+  rightImageEl.src = cityDirectory[randomCityPlaceholder].filePath;
+  midwayCityDirectory.push(cityDirectory[randomCityPlaceholder]);
 
   //if original array is empty, recycle everything
     if((cityDirectory.length === 0) && (treesDirectory.length === 0)){
         resetImages();
       }
+
 }
 
 leftImageEl.addEventListener("click", selectImageLeft);
 rightImageEl.addEventListener("click", selectImageRight);
+//resetButtonEl.addEventListener("click", cycleImages);
+
 
 //voteButton.addEventListener("click", voteSubmit);
 
