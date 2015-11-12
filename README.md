@@ -3,6 +3,8 @@ Code project 3 for codefellows 201. Team coded by Jake Herold and Connor Cumming
 
 Google API Key
 AIzaSyCpz-KXaPJKrd4OjsUR8HFN-sRrYnoOGC8
+Weather API Key
+d343a1cd6dcf1643a83e133b7658686e
 
 11/11/15
 added jquery. Fixed css. reasonable mobile experience.
