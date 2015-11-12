@@ -7,7 +7,14 @@ Weather API Key
 d343a1cd6dcf1643a83e133b7658686e
 
 11/11/15
-added jquery. Fixed css. reasonable mobile experience.
+added jquery. Fixed css. reasonable mobile experience. added google street view thingie.
+Couldn't get Jquery working to change the attributes for one reason or another. Used Jquery selectors, instead and got the same functionality.
+
+to-do:
+----------
+0. get weather working
+1. get user logic working
+2. Just those two things. Those are big things.
 
 
 11/10/15
