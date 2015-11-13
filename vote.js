@@ -27,10 +27,6 @@ midwayCityDirectory = [];
 emptyHatTrees = [];
 emptyHatCities = [];
 
-cityUserVote = 0;
-treeUserVote = 0;
-totalUserVote = cityUserVote + treeUserVote;
-
 var totalTreeTemp = function() {
   var treeTemp = 0;
   for (ii = 0; ii<treeDirectory.length; ii++ ){
@@ -74,7 +70,7 @@ leftImageEl = $('#leftImage')[0];
 rightImageEl = document.getElementById("rightImage");
 resetButtonEl = document.getElementById("resetButton");
 voteButtonEl = document.getElementById("voteButton");
-streetView = $('#street-view')[0];
+
 
 //IMAGE DATA OBJECT CONSTRUCTION
 function imageConstructor(filePath){
@@ -130,17 +126,7 @@ function cycleImages(){
     if((cityDirectory.length === 0) && (treesDirectory.length === 0)){
         resetImages();
       }
-
       makeChart();
-
-      //spawn map on 15th vote
-    if ( totalUserVote > 14){
-        console.log("MAP 1 IS FIRING");
-        makeMap();
-        makeWeather();
-
-        totalUserVote=0;
-      }
 }
 
 leftImageEl.addEventListener("click", selectImageLeft);
@@ -159,17 +145,12 @@ function selectImageLeft() {
   treeVoteTotal++;
   console.log("i'm image " + midwayTreeDirectory[0].filePath + " and my vote count is " + midwayTreeDirectory[0].voteNumber);
   cycleImages();
-  treeUserVote++;
-  totalUserVote++;
-
 }
 function selectImageRight(){
   midwayCityDirectory[0].voteNumber++;
   cityVoteTotal++;
   console.log("i'm image " + midwayCityDirectory[0].filePath + " and my vote count is " + midwayCityDirectory[0].voteNumber);
   cycleImages();
-  cityUserVote++;
-  totalUserVote++;
 }
 
 function resetImages(){
@@ -196,7 +177,6 @@ function resetImages(){
       }
     }
   }
-
 }
 
 //CHART STUFF
@@ -231,23 +211,90 @@ function resetImages(){
 //chart.destroy();
 chart.render();
 }
+console.log("start");
 
+var weatherData = {};
+var temp_min = [];
+var temp_now = [];
+var temp_max = [];
+var k2cOffset = 273.15; // Kelvin vs. Celcius shift
 
-function makeMap(){
-  console.log("MAKE MAP FUNCTION 2 IS FIRING");
-
-  if(totalUserVote === 15){
-
-        streetView.style.visibility = "visible";
-    }
-
-
-
-  initialize();
-
+function k2f(x) {
+  return (x - k2cOffset) * 1.8 + 32;
 }
 
+var barData = {
+  labels : ["0","1","2","3","4","5","6"],
+  datasets : [
+    { fillColor : "rgba(220,220,220,0.5)",
+      strokeColor : "rgba(220,220,220,0.8)",
+      highlightFill: "rgba(220,220,220,0.75)",
+      highlightStroke: "rgba(220,220,220,1)",
+      data : [20,21,22,23,24,25,26]
+//temp_min.slice(0,6)
+//    data: [randGen(),randGen(),randGen(),randGen(),randGen(),randGen(),randGen()]
+    },
+    { fillColor : "rgba(151,187,205,0.5)",
+      strokeColor : "rgba(151,187,205,0.8)",
+      highlightFill : "rgba(151,187,205,0.75)",
+      highlightStroke : "rgba(151,187,205,1)",
+      data : [30,29,28,27,26,25,24]
+//    data : temp_min.slice(0,6)
+//    data : [randGen(),randGen(),randGen(),randGen(),randGen(),randGen(),randGen()]
+    }
+  ]
+}
 
-function makeWeather(){
+function processResp(rObj) {
+  list = rObj.list;
 
+  for (ii=0; ii < list.length; ii++) {
+    main = list[ii].main;
+    temp_min[ii] = k2f(main.temp_min);
+    temp_max[ii] = k2f(main.temp_max);
+    temp_now[ii] = Math.round(k2f(main.temp_now));
+  }
+
+  console.log("temp_min=" + temp_min);
+  console.log("temp_max=" + temp_max);
+}
+
+/*
+car stringified:  "{"speed":50,"color":"red"}";
+
+var donut = { sprinkles: true, cost: 1.50 };
+var myObjString = "{ sprinkles: true, cost: 1.50 }";
+
+var obj = JSON.parse(string);
+
+var cityName = userInputE.value;
+
+var URLinput = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&mode=json&appid=2de143494c0b295cca9337e1e96b00e0";
+*/
+
+$.ajax(
+   { url: "http://api.openweathermap.org/data/2.5/forecast?q=London,us&mode=json&appid=2de143494c0b295cca9337e1e96b00e0",
+     beforeSend: function(xhr) {
+   //xhr.overrideMimeType("text/plain; charset=x-user-defined");
+    }
+   })
+   // End of ajax(), but here we do some chaining:
+   .done( function(respObj) { // Success
+      console.log("respObj = ", respObj);
+      processResp(respObj);
+      barData.datasets[0].data = temp_min.slice(0,7);
+      barData.datasets[1].data = temp_max.slice(0,7);
+      window.myBar = new Chart(ctx).Bar(barData, {responsive:true});
+      console.log("Done");
+   })
+  .fail ( function() {
+    console.log("XHR failed.");
+  });
+
+var randGen = function() {
+    return Math.round(100 * Math.random());
+};
+
+window.onload = function() {
+  ctx = $("canvas")[0].getContext("2d");
 }

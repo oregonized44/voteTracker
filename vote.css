@@ -12,19 +12,22 @@ header{
 
 
 body{
-background-color: #EFECCA;
+background-image: url("city9.jpg");
+background-size: 100%;
+
 }
 
 footer{
-  margin-left: 25%;
-
+  position: inherit;
 
 }
+
+
 #leftImage{
 width: 400px;
 height: 300px;
-/*display: inline-block;*/
-margin:auto;
+display:center;
+
 
 
 
@@ -38,9 +41,18 @@ height: 300px;
 }
 
 #chartContainer{
-margin:auto;
+  margin: 0 auto;
+  text-align: left;
+  width: 800px;
 }
 
+#footer{
+  margin: 0 auto;
+  text-align: left;
+  width: 400px;
+
+
+}
 /*@media screen and (max-width: 690px) {
     .mobileClass {
       width: 40%;
@@ -52,21 +64,12 @@ margin:auto;
 }
 */
 #outImgDiv{
-  margin: auto;
-  margin-left: 15%;
+  margin: 0 auto;
+  text-align: left;
+  width: 400px;
+  align-content: center;
 }
-
-#innerImgDiv{
-
-
+/*#innerImgDiv{
+display:center;
+position:center;
 }
-
-#street-view {
-/*display:none  ;*/
-visibility: hidden;
-height: 400px;
-width: 400px;
-}
-
-
-
