@@ -1,0 +1,75 @@
+h2 {
+  font-family: 'Wellfleet';
+  font-color: #002F2F;
+  text-align: center;
+}
+header{
+  font-family: 'Wellfleet';
+  font-color:#002F2F;
+  font-size: 3em;
+  text-align: center;
+}
+
+
+body{
+background-image: url("city9.jpg");
+background-size: 100%;
+
+}
+
+footer{
+  position: inherit;
+
+}
+
+
+#leftImage{
+width: 400px;
+height: 300px;
+display:center;
+
+
+
+
+}
+#rightImage{
+width: 400px;
+height: 300px;
+/*display: inline-block;*/
+
+
+}
+
+#chartContainer{
+  margin: 0 auto;
+  text-align: left;
+  width: 800px;
+}
+
+#footer{
+  margin: 0 auto;
+  text-align: left;
+  width: 400px;
+
+
+}
+/*@media screen and (max-width: 690px) {
+    .mobileClass {
+      width: 40%;
+    }
+    #chartContainer{
+      width:80%;
+    }
+
+}
+*/
+#outImgDiv{
+  margin: 0 auto;
+  text-align: left;
+  width: 400px;
+  align-content: center;
+}
+/*#innerImgDiv{
+display:center;
+position:center;
+}

@@ -1,0 +1,37 @@
+h2{
+  width:90%;
+  text-align: center;
+  font-family: 'Wellfleet';
+
+}
+
+header{
+  font-family: 'Wellfleet';
+  font-color:#002F2F;
+  font-size:2em;
+}
+button{
+color:black;
+background-color: #046380;
+width: 50%;
+background-image: url("city.9.jpg");
+}
+
+body{
+background-color: #EFECCA;
+}
+#leftImage{
+width: 50%;
+display: inline-block;
+
+
+}
+#rightImage{
+width:50%;
+display: inline-block;
+
+}
+
+#chartContainer{
+
+}
